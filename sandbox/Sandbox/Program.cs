@@ -4,9 +4,13 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Bonjour tout le monde ");
-        Console.WriteLine("Hey Jude");
-        Console.WriteLine("Hey Person ");
-        
+        string firstName;
+        string lastName;
+        Console.Write("Please enter your name");
+        firstName = Console.ReadLine();
+        Console.Write("Please enter your last name: ")
+        lastName = Console.ReadLine();
+
+        Console.WriteLine($"{firstName} {lastName}");
     }
 }
