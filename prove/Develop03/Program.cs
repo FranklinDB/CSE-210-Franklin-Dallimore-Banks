@@ -4,8 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        Word myWord = new Word("Secret");
-
-        myWord.Display();
+        Scripture myScripture = new Scripture("Moses", 1, 39, "");
+        myScripture.ShowScripture();
     }
+
 }
