@@ -1,38 +1,82 @@
 using System;
-
+using System.Collections.Generic;
 class Program
 {
-    static void Main(string[] args)
+static void Main(string[] args)
+{
+    Journal journal = new Journal();
+    string choice = "";
+
+    List<string> prompts = new List<string>
+{
+    "What was the best part of my day?",
+    "Who was the most interesting person I interacted with today?",
+    "What was the strongest emotion I felt today?",
+    "What is something new I learned today?",
+    "What is one thing I could improve tomorrow?"
+};
+
+Random random = new Random();
+
+    while (choice != "5")
     {
-        // For Parts 1 and 2, where the user specified the number...
-        // Console.Write("What is the magic number? ");
-        // int magicNumber = int.Parse(Console.ReadLine());
-        
-        // For Part 3, where we use a random number
-        Random randomGenerator = new Random();
-        int magicNumber = randomGenerator.Next(1, 101);
+        Console.WriteLine("Menu Options:");
+        Console.WriteLine("1. Write a new entry");
+        Console.WriteLine("2. Display the journal");
+        Console.WriteLine("3. Save the journal");
+        Console.WriteLine("4. Load the journal");
+        Console.WriteLine("5. Quit");
+        Console.Write("Select an option: ");
 
-        int guess = -1;
+        choice = Console.ReadLine();
 
-        // We could also use a do-while loop here...
-        while (guess != magicNumber)
+        if (choice == "1")
         {
-            Console.Write("What is your guess? ");
-            guess = int.Parse(Console.ReadLine());
+            int index = random.Next(prompts.Count);
+            string prompt = prompts[index];
+            
+            Console.WriteLine(prompt);
+            Console.Write("> ");
+            string response = Console.ReadLine();
+            string date = DateTime.Now.ToShortDateString();
 
-            if (magicNumber > guess)
-            {
-                Console.WriteLine("Higher");
-            }
-            else if (magicNumber < guess)
-            {
-                Console.WriteLine("Lower");
-            }
-            else
-            {
-                Console.WriteLine("You guessed it!");
-            }
+            Entry entry = new Entry(date, prompt, response);
+            journal.AddEntry(entry);
 
-        }                    
+            Console.WriteLine("Entry added.");
+        }
+
+        else if (choice == "2")
+        {
+            journal.Display();
+        {
+
+}
+        }
+        else if (choice == "3")
+        {
+            Console.Write("Enter a filename: ");
+            string filename = Console.ReadLine();
+
+            journal.SaveToFile(filename);
+            Console.WriteLine("Journal saved.");
+        }
+        else if (choice == "4")
+        {
+            Console.Write("Enter a filename: ");
+            string filename = Console.ReadLine();
+
+            journal.LoadFromFile(filename);
+            Console.WriteLine("Journal loaded.");
+        }
+        else if (choice == "5")
+        {
+            Console.WriteLine("Goodbye!");
+        }
+        else
+        {
+            Console.WriteLine("Invalid option.");
+        }
     }
+}
 }
